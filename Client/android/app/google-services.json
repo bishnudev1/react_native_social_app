@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "748082618950",
+    "project_id": "authfire-72faf",
+    "storage_bucket": "authfire-72faf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748082618950:android:09904c1895e2cacec4e047",
+        "android_client_info": {
+          "package_name": "com.fireauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748082618950-15p6p5plnr0tpb1h8vo04e767k0msqr9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8cn9hKn_eNDApGDdrDzCcLhQZvGWPf2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748082618950-15p6p5plnr0tpb1h8vo04e767k0msqr9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
