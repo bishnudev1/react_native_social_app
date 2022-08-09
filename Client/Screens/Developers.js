@@ -21,7 +21,7 @@ const Developers = () => {
 
     return (
         <View>
-            <View style={{ padding: 20, height: '100%' }}>
+            <View style={{ paddingVertical: 20, height: '100%' }}>
                 <Text style={{ fontSize: 25, textAlign: 'center', paddingBottom: 20 }}>All developers</Text>
                 <FlatList
                     showsVerticalScrollIndicator={false}
@@ -30,18 +30,26 @@ const Developers = () => {
                     renderItem={({ item }) => {
                         return (
                             <View key={item._id} style={[styles.flatlist, styles.shadowProp]}>
-                                <View style={{ backgroundColor: 'skyblue', justifyContent: 'space-around', alignItems: 'center', padding: 5, borderRadius: 20 }}>
+                                <View style={{ backgroundColor: 'lightgrey', justifyContent: 'space-evenly', alignItems: 'center', padding: 15 }}>
                                     <Text style={styles.mydesc}>{item._id}</Text>
-                                    <Image style={styles.myimg} source={require('../Assets/Images/DP.png')} />
+                                    <View style={{ flexDirection: 'row',width:'100%',justifyContent:'space-evenly' }}>
+                                        <View>
+                                            <Image style={styles.myimg} source={require('../Assets/Images/DP.png')} />
+                                        </View>
+                                        <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <Text style={styles.mydesc}>{item.name}</Text>
+                                                <Icon name='check' size={18} color='green' />
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <Text style={styles.mydesc}>{item.residence}</Text>
+                                                <Icon name='home' size={18} color='green' />
+                                            </View>
+                                        </View>
+                                    </View>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <View>
-                                            <Text style={styles.mydesc}>{item.name}</Text>
-                                            <Text style={styles.mydesc}>{item.work}</Text>
-                                        </View>
-                                        <View>
-                                            <Text style={styles.mydesc}>{item.job}</Text>
-                                            <Text style={styles.mydesc}>{item.residence}</Text>
-                                        </View>
+                                        <Text style={styles.mydesc}>{item.work}</Text>
+                                        <Text style={styles.mydesc}>{item.job}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Icon style={{ padding: 10 }} name='facebook' color='blue' size={30} />

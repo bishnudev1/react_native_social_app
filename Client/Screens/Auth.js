@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Axios from 'axios';
 
 
-const Login = ({ navigation }) => {
+const Auth = ({ navigation }) => {
 
     const [create, setCreate] = useState(false);
     const [name, setName] = useState('');
@@ -25,7 +25,7 @@ const Login = ({ navigation }) => {
                     Alert.alert('Success', 'Login successfull')
                     navigation.navigate('Home');
                 }
-                else {
+                else if(resp.status === 422 || resp.status === 404){
                     Alert.alert('Error', 'Wrong crediantials')
                 }
             } catch (error) {
@@ -47,7 +47,7 @@ const Login = ({ navigation }) => {
                     cpassword
                 });
                 if (resp.status === 201) {
-                    Alert.alert('Success', 'Your data has been saved');
+                    Alert.alert('Success', 'Your account has been created');
                     setName('');
                     setEmail('');
                     setPassword('');
@@ -133,4 +133,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Login
+export default Auth

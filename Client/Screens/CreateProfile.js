@@ -1,9 +1,14 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
 
 
 const CreateProfile = ({ navigation }) => {
+
+
+  useEffect(() => {
+
+  },[]);
 
   const addProfile = async () => {
     try {
@@ -18,8 +23,11 @@ const CreateProfile = ({ navigation }) => {
           residence
         });
         if (resp.status === 201) {
-          Alert.alert('Success', 'Your data has been saved');
-          navigation.navigate('Developers');
+          Alert.alert('Success', 'Your developer profile has been saved',[
+            {text: 'Go to developers feed', onPress:() => {navigation.navigate('Developers');}},
+            {text: 'Create another profile', onPress:() => {navigation.navigate('Create profile')}}
+          ]);
+          
         }
         else {
           Alert.alert('Error', 'Something went wrong', [{ text: 'Understand' }]);
@@ -42,11 +50,11 @@ const CreateProfile = ({ navigation }) => {
         <Image style={styles.img} source={require('../Assets/Images/Profile.png')} />
       </View>
       <View>
-        <Text style={styles.devlabel}>Developer username</Text>
+        <Text style={styles.devlabel}>Developer name</Text>
         <TextInput value={name} onChangeText={(e) => setName(e)} style={styles.devinputs} placeholder='Enter your username' />
-        <Text style={styles.devlabel}>Developer date of birth</Text>
+        <Text style={styles.devlabel}>Developer work</Text>
         <TextInput value={job} onChangeText={(e) => setJob(e)} style={styles.devinputs} placeholder='Enter your date of birth' />
-        <Text style={styles.devlabel}>Developer hobby</Text>
+        <Text style={styles.devlabel}>Developer type</Text>
         <TextInput value={work} onChangeText={(e) => setWork(e)} style={styles.devinputs} placeholder='Enter your hobby' />
         <Text style={styles.devlabel}>Developer residence</Text>
         <TextInput value={residence} onChangeText={(e) => setResidence(e)} style={styles.devinputs} placeholder='Enter your residence' />
