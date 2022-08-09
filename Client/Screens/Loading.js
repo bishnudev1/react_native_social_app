@@ -1,13 +1,24 @@
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
 import React, { useEffect } from 'react'
+import PushNotification from "react-native-push-notification";
 
-const Loading = ({navigation}) => {
+const Loading = ({ navigation }) => {
 
   useEffect(() => {
+    createChannels();
     setTimeout(() => {
       navigation.navigate('Auth');
-    },4000)
+    }, 4000)
   }, []);
+
+  const createChannels = () => {
+    PushNotification.createChannel(
+      {
+        channelId: "welcome",
+        channelName: "Welcome to Developers World"
+      }
+    )
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff', justifyContent: 'center', height: '100%' }}>
