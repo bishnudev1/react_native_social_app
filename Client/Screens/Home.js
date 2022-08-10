@@ -1,12 +1,39 @@
 import { View, Text, Alert, TouchableOpacity, Image, StyleSheet } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PushNotification from "react-native-push-notification";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = ({ navigation }) => {
 
+  const [islogged, setIslogged] = useState(false);
+
+  const getToken = async () => {
+    const token = await AsyncStorage.getItem('token');
+    console.log("Token : " + token);
+    if (token) {
+      setIslogged(true)
+    }
+    else {
+      setIslogged(false)
+    }
+  }
+
+  const createProfile = () => {
+    if (islogged === false) {
+      Alert.alert('Warning', 'You must be logged in to create your developer account', [
+        { text: 'Log in', onPress: () => navigation.navigate('Auth') },
+        { text: 'Cancel', onPress: () => console.log('Cancel') }
+      ])
+    }
+    else if(islogged === true){
+      console.log('Nikal bsdk')
+      navigation.navigate('Create profile')
+    }
+  }
 
   useEffect(() => {
     showNotify();
+    getToken();
   }, []);
 
   const showNotify = () => {
@@ -28,7 +55,7 @@ const Home = ({ navigation }) => {
           <Text style={{ textAlign: 'center', fontSize: 18 }}>A safe place where all developers interects with each other</Text>
         </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Create profile')} style={styles.btncontainer}>
+          <TouchableOpacity onPress={createProfile} style={styles.btncontainer}>
             <Text style={styles.btntext}>Create my profile</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Developers')} style={styles.btncontainer}>

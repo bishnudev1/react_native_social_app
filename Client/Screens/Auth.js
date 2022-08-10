@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity, Alert, TextInput, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import Axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -37,31 +38,26 @@ const Auth = ({ navigation }) => {
     }
 
     const registerUser = async () => {
-        try {
-            if (!name || !email || !password || !cpassword) {
-                Alert.alert('Warning', 'Fill all details correctly', [{ text: 'Okay' }]);
+        fetch("http://10.0.2.2:5000/register",{
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                name,email,password,cpassword
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            try {
+                AsyncStorage.setItem('token',data.token);
+                //console.log(data.token);
+                Alert.alert('Welcome','You have registered successfully');
+                navigation.navigate('Home');
+            } catch (error) {
+                Alert.alert('Error','Something went wrong',[{text:'Okay'}])
             }
-            if (password === cpassword) {
-                const resp = await Axios.post('http://10.0.2.2:5000/register', {
-                    name,
-                    email,
-                    password,
-                    cpassword
-                });
-                if (resp.status === 201) {
-                    Alert.alert('Success', 'Your account has been created');
-                    navigation.navigate('Home');
-                }
-                else {
-                    Alert.alert('Error', 'Something went wrong', [{ text: 'Understand' }]);
-                }
-            }
-            else {
-                Alert.alert('Warning', 'Passwords are not matching', [{ text: 'Okay' }]);
-            }
-        } catch (err) {
-            console.log(err);
-        }
+        })
     }
 
     return (

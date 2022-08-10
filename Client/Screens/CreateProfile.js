@@ -1,14 +1,10 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, TextInput } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Axios from 'axios';
 
 
 const CreateProfile = ({ navigation }) => {
 
-
-  useEffect(() => {
-
-  },[]);
 
   const addProfile = async () => {
     try {
@@ -53,9 +49,9 @@ const CreateProfile = ({ navigation }) => {
         <Text style={styles.devlabel}>Developer name</Text>
         <TextInput value={name} onChangeText={(e) => setName(e)} style={styles.devinputs} placeholder='Enter your username' />
         <Text style={styles.devlabel}>Developer work</Text>
-        <TextInput value={job} onChangeText={(e) => setJob(e)} style={styles.devinputs} placeholder='Enter your date of birth' />
-        <Text style={styles.devlabel}>Developer type</Text>
-        <TextInput value={work} onChangeText={(e) => setWork(e)} style={styles.devinputs} placeholder='Enter your hobby' />
+        <TextInput value={job} onChangeText={(e) => setJob(e)} style={styles.devinputs} placeholder='Enter your work details' />
+        <Text style={styles.devlabel}>Developer study</Text>
+        <TextInput value={work} onChangeText={(e) => setWork(e)} style={styles.devinputs} placeholder='Enter your university name' />
         <Text style={styles.devlabel}>Developer residence</Text>
         <TextInput value={residence} onChangeText={(e) => setResidence(e)} style={styles.devinputs} placeholder='Enter your residence' />
         <TouchableOpacity onPress={addProfile} style={{ padding: 8, backgroundColor: 'orange', borderRadius: 10, marginTop: 10 }}>

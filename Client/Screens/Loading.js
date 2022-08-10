@@ -7,7 +7,7 @@ const Loading = ({ navigation }) => {
   useEffect(() => {
     createChannels();
     setTimeout(() => {
-      navigation.navigate('Auth');
+      navigation.navigate('Home');
     }, 4000)
   }, []);
 
