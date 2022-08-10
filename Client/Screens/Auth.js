@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity, Alert, TextInput, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import Axios from 'axios';
+//import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Auth = ({ navigation }) => {
@@ -10,6 +11,7 @@ const Auth = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [cpassword, setCpassword] = useState('');
+    //const [token, setToken] = useState(null);
 
     const loginUser = async () => {
         if (!email || !password) {
@@ -48,10 +50,6 @@ const Auth = ({ navigation }) => {
                 });
                 if (resp.status === 201) {
                     Alert.alert('Success', 'Your account has been created');
-                    setName('');
-                    setEmail('');
-                    setPassword('');
-                    setCpassword('');
                     navigation.navigate('Home');
                 }
                 else {

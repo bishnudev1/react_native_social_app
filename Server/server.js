@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const port = 5000 || process.env.PORT;
 const cors = require('cors');
 const Routes = require('./utils/Routes');
+const requireAuth = require('./utils/requireAuth');
 
 const app = express();
 app.use(cors());
@@ -19,8 +20,8 @@ mongoose.connect('mongodb://localhost:27017/developerworld', {
 app.use(express.json());
 app.use(Routes);
 
-app.use('/', (req, res) => {
-    res.send('Hello,World!');
+app.use('/',requireAuth, (req, res) => {
+    res.send("Your email id is : "+ req.user.email);
 });
 
 app.listen(port, () => {

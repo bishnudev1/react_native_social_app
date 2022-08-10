@@ -1,9 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../utils/Schema');
 const Profile = require('../utils/ProfileSchema');
+const { jwtkey } = require('../keys');
 
 router.use(cors());
 
@@ -12,24 +13,29 @@ router.get('/get-users', async (req, res) => {
     res.send(users);
 });
 
-router.get('/get-profiles', async (req,res) => {
+router.get('/get-profiles', async (req, res) => {
     const profiles = await Profile.find();
     res.send(profiles);
 });
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
     const { name, email, password, cpassword } = req.body;
 
     if (!name || !email || !password || !cpassword) {
         res.status(422).json({ warning: "fill the all details" });
     }
 
-    const newuser = new User({ name, email, password, cpassword });
-    newuser.save().then(() => {
-        res.status(201).json({ sucess: "user added successfully" });
-    }).catch(() => {
-        res.status(404).json({ error: "failed to add user" });
-    })
+    try {
+        const newuser = new User({ name, email, password, cpassword });
+        res.status(201);
+        await newuser.save();
+        const token = jwt.sign({ userId: newuser._id }, jwtkey);
+        console.log(token);
+        res.send({ token });
+    } catch (error) {
+        console.log(error);
+    }
+
 });
 
 router.post('/login', async (req, res) => {
