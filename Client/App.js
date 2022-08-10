@@ -2,18 +2,18 @@ import { View, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Auth from './Screens/Auth'
 import Home from './Screens/Home'
-import Loading from './Screens/Loading';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import CreateProfile from './Screens/CreateProfile'
 import Developers from './Screens/Developers';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PushNotification from "react-native-push-notification";
 
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const App = () => {
 
-  const [islogged, setIslogged] = useState(false);
+  const [islogged, setIslogged] = useState(null);
   console.log(islogged);
 
   const getToken = async () => {
@@ -23,25 +23,46 @@ const App = () => {
       setIslogged(true)
     }
     else {
-      setIslogged(false)
+      setIslogged(null)
     }
   }
 
   useEffect(() => {
     getToken();
+    createChannels();
   }, [])
+
+  const createChannels = () => {
+    PushNotification.createChannel(
+      {
+        channelId: "welcome",
+        channelName: "Welcome to Developers World"
+      }
+    )
+  }
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={
-        islogged ? 'Auth' : 'Loading'
+      <Drawer.Navigator initialRouteName={
+        islogged ? 'Auth' : 'Home'
       }>
-        <Stack.Screen options={{ headerShown: false }} name='Auth' component={Auth} />
-        <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
-        <Stack.Screen options={{ headerShown: false }} name='Loading' component={Loading} />
-        <Stack.Screen options={{ headerShown: false }} name='Create profile' component={CreateProfile} />
-        <Stack.Screen options={{ headerShown: false }} name='Developers' component={Developers} />
-      </Stack.Navigator>
+
+        {
+          islogged ? (
+            <>
+              <Drawer.Screen name='Home' component={Home} />
+              <Drawer.Screen name='Create profile' component={CreateProfile} />
+              <Drawer.Screen name='Developers' component={Developers} />
+            </>
+          ) : (
+            <>
+              <Drawer.Screen name='Auth' component={Auth} />
+              <Drawer.Screen name='Home' component={Home} />
+              <Drawer.Screen name='Developers' component={Developers} />
+            </>
+          )
+        }
+      </Drawer.Navigator>
     </NavigationContainer>
   )
 }

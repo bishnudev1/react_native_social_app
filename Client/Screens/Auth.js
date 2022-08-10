@@ -51,7 +51,7 @@ const Auth = ({ navigation }) => {
         .then(data => {
             try {
                 AsyncStorage.setItem('token',data.token);
-                //console.log(data.token);
+                console.log(data.token);
                 Alert.alert('Welcome','You have registered successfully');
                 navigation.navigate('Home');
             } catch (error) {
@@ -61,7 +61,7 @@ const Auth = ({ navigation }) => {
     }
 
     return (
-        <View style={{ flex: 1, height: '100%', padding: 25, justifyContent: 'space-evenly', backgroundColor: 'white' }}>
+        <View style={{ flex: 1, height: '100%', padding: 30, justifyContent: 'space-evenly', backgroundColor: 'white' }}>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ fontSize: 30, paddingBottom: 0 }}>Developers World</Text>
                 <Image style={styles.img} source={require('../Assets/Images/Login.png')} />
@@ -96,7 +96,7 @@ const Auth = ({ navigation }) => {
                         <TouchableOpacity onPress={registerUser} style={styles.loginbtn}>
                             <Text style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', fontSize: 18 }}>Sign up</Text>
                         </TouchableOpacity>
-                        <Text onPress={() => setCreate(true)} style={{ fontSize: 15, paddingTop: 15 }}>Already have an account ? Sign in</Text>
+                        <Text onPress={() => setCreate(true)} style={{ fontSize: 15, paddingTop: 5 }}>Already have an account ? Sign in</Text>
                     </View>
                 }
             </View>

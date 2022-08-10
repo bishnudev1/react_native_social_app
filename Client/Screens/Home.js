@@ -25,7 +25,7 @@ const Home = ({ navigation }) => {
         { text: 'Cancel', onPress: () => console.log('Cancel') }
       ])
     }
-    else if(islogged === true){
+    else if (islogged === true) {
       console.log('Nikal bsdk')
       navigation.navigate('Create profile')
     }
@@ -44,9 +44,14 @@ const Home = ({ navigation }) => {
     })
   }
 
+  const signOut = async () => {
+    await AsyncStorage.removeItem('token');
+    Alert.alert('Success', 'Log out successfully', [{ text: 'Create Account or Login ?', onPress: () => navigation.navigate('Auth') }]);
+  }
+
   return (
     <View style={{ height: '100%', backgroundColor: 'white' }}>
-      <View style={{ justifyContent: 'space-between', height: '100%', padding: 25 }}>
+      <View style={{ justifyContent: 'space-between', height: '100%', padding: 20 }}>
         <View>
           <Text style={{ textAlign: 'center', fontSize: 25 }}>Welcome Developer</Text>
         </View>
@@ -61,6 +66,11 @@ const Home = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate('Developers')} style={styles.btncontainer}>
             <Text style={styles.btntext}>Developer feed</Text>
           </TouchableOpacity>
+          {
+            islogged ? <TouchableOpacity onPress={signOut} style={styles.btncontainer}>
+              <Text style={styles.btntext}>Sign out</Text>
+            </TouchableOpacity> : null
+          }
         </View>
       </View>
     </View>
