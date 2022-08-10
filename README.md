@@ -2,4 +2,8 @@
 Developers world - a social media app for developers built with React native + Node js + Mongoose
 
 # Alert !!!!!!!!!!!!!!
-## The project is not fully done yet. 
+## This project is not fully done yet. 
+
+### Next task
+- Add token to login route as well as register
+- Manage token state (islogged) globaly using usereducer and usecontext
