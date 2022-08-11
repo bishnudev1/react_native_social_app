@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
     const token = authorization.replace("Bearer ", "");
     jwt.verify(token, jwtkey, async (err, payload) => {
         if (err) {
-            res.status(401).send({ error: 'you must be logged in' });
+            res.status(401).send({ error: 'you must be logged in to the same account' });
         }
         const { userId } = payload;
         const user = await User.findById(userId);

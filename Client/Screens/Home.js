@@ -1,7 +1,8 @@
 import { View, Text, Alert, TouchableOpacity, Image, StyleSheet } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import PushNotification from "react-native-push-notification";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserContext } from '../Api/UserContext';
 
 const Home = ({ navigation }) => {
 
@@ -44,8 +45,11 @@ const Home = ({ navigation }) => {
     })
   }
 
+  const { isloggedIn, setIsloggedIn } = useContext(UserContext);
+
   const signOut = async () => {
     await AsyncStorage.removeItem('token');
+    setIsloggedIn(false);
     Alert.alert('Success', 'Log out successfully', [{ text: 'Create Account or Login ?', onPress: () => navigation.navigate('Auth') }]);
   }
 

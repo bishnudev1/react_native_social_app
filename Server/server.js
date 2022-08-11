@@ -20,8 +20,8 @@ mongoose.connect('mongodb://localhost:27017/developerworld', {
 app.use(express.json());
 app.use(Routes);
 
-app.use('/',requireAuth, (req, res) => {
-    res.send("Your email id is : "+ req.user.email);
+app.use('/User',requireAuth, (req, res) => {
+    res.send(req.user);
 });
 
 app.listen(port, () => {
