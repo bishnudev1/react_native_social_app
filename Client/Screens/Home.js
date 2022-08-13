@@ -27,22 +27,26 @@ const Home = ({ navigation }) => {
       ])
     }
     else if (islogged === true) {
-      console.log('Nikal bsdk')
       navigation.navigate('Create profile')
     }
   }
 
   useEffect(() => {
-    showNotify();
     getToken();
   }, []);
 
+  useEffect(() => {
+    showNotify();
+  }, []);
+
   const showNotify = () => {
-    PushNotification.localNotification({
-      channelId: "welcome",
-      title: "Welcome to Developers world",
-      message: "Create your free developer account now"
-    })
+    setTimeout(() => {
+      PushNotification.localNotification({
+        channelId: "welcome",
+        title: "Welcome to Developers world",
+        message: "Create your free developer account now"
+      })
+    }, 2000)
   }
 
   const { isloggedIn, setIsloggedIn } = useContext(UserContext);
