@@ -5,5 +5,5 @@ Developers world - a social media app for developers built with React native + N
 ## This project is not fully done yet. 
 
 ### Next task
-- Add token to login route as well as register
-- Manage token state (islogged) globaly using usereducer and usecontext
+- Add image uploader options for user
+- Fixing some bug and increase stability and performance
