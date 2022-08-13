@@ -34,9 +34,6 @@ router.post('/register', async (req, res) => {
         const newuser = new User({ name, email, password, cpassword });
         res.status(201);
         await newuser.save();
-        const token = jwt.sign({ userId: newuser._id }, jwtkey);
-        console.log(token);
-        res.send({ token });
     } catch (error) {
         console.log(error);
     }
@@ -53,14 +50,18 @@ router.post('/login', async (req, res) => {
     const isExist = await User.findOne({ email: email });
     if (isExist) {
         if (isExist.email === email && isExist.password === password) {
-            res.status(201).json({ sucess: 'Login successfull' });
+            res.status(201)
+            console.log(isExist._id);
+            const token = jwt.sign({ userId: isExist._id }, jwtkey);
+            console.log(token);
+            res.send({ token });
         }
         else {
-            res.status(422).json({ sucess: 'Wrong crediantials' });
+            res.status(422).json({ wrong: 'Wrong crediantials' });
         }
     }
     else {
-        res.status(422).json({ sucess: 'User does not exist' });
+        res.status(422).json({ wrong: 'User does not exist' });
     }
 });
 

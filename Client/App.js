@@ -1,6 +1,7 @@
 import { View, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Auth from './Screens/Auth'
+import Register from './Screens/Register'
+import Login from './Screens/Login'
 import Home from './Screens/Home'
 import About from './Screens/About'
 import { NavigationContainer } from '@react-navigation/native';
@@ -53,7 +54,7 @@ const App = () => {
             width: 250
           }}
           initialRouteName={
-            isloggedIn ? 'Auth' : 'Home'
+            isloggedIn ? 'Register' : 'Home'
           }>
 
           {
@@ -119,10 +120,24 @@ const App = () => {
             ) : (
               <>
                 <Drawer.Screen
-                  name='Auth'
-                  component={Auth}
+                  name='Register'
+                  component={Register}
                   options={{
-                    title: "Account",
+                    title: "Register",
+                    drawerIcon: ({ focused }) => (
+                      <Icon
+                        name='user'
+                        size={focused ? 25 : 20}
+                        color={focused ? 'blue' : 'pink'}
+                      />
+                    )
+                  }}
+                />
+                <Drawer.Screen
+                  name='Login'
+                  component={Login}
+                  options={{
+                    title: "Login",
                     drawerIcon: ({ focused }) => (
                       <Icon
                         name='user'

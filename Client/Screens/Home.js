@@ -22,7 +22,7 @@ const Home = ({ navigation }) => {
   const createProfile = () => {
     if (islogged === false) {
       Alert.alert('Warning', 'You must be logged in to create your developer account', [
-        { text: 'Log in', onPress: () => navigation.navigate('Auth') },
+        { text: 'Log in', onPress: () => navigation.navigate('Login') },
         { text: 'Cancel', onPress: () => console.log('Cancel') }
       ])
     }
@@ -50,7 +50,7 @@ const Home = ({ navigation }) => {
   const signOut = async () => {
     await AsyncStorage.removeItem('token');
     setIsloggedIn(false);
-    Alert.alert('Success', 'Log out successfully', [{ text: 'Create Account or Login ?', onPress: () => navigation.navigate('Auth') }]);
+    Alert.alert('Success', 'Log out successfully', [{ text: 'Create Account or Login ?', onPress: () => navigation.navigate('Login') }]);
   }
 
   return (
